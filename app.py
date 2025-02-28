@@ -3,10 +3,8 @@ import pandas as pd
 import os
 from io import BytesIO
 
-# Set up Streamlit app with custom styling
 st.set_page_config(page_title="Data Sweeper", layout='wide')
 
-# Custom CSS for better styling
 st.markdown(
     """
     <style>
@@ -36,20 +34,16 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Title with styling
 st.markdown("<h1 style='text-align: center; color: #4A90E2;'>📊 Data Sweeper</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: gray;'>Effortlessly clean, visualize, and convert your datasets!</p>", unsafe_allow_html=True)
 
-# Sidebar for file upload
 st.sidebar.header("📂 Upload Your Files")
 uploaded_files = st.sidebar.file_uploader("Upload CSV or Excel files", type=["csv", "xlsx"], accept_multiple_files=True)
 
-# Process files
 if uploaded_files:
     for file in uploaded_files:
         file_ext = os.path.splitext(file.name)[-1].lower()
 
-        # Read file based on extension
         if file_ext == ".csv":
             df = pd.read_csv(file)
         elif file_ext == ".xlsx":
@@ -58,28 +52,25 @@ if uploaded_files:
             st.sidebar.error(f"❌ Unsupported file type: {file_ext}")
             continue
 
-        # File Info
         st.markdown(f"### 📂 File: {file.name}")
-        st.write(f"**📏 Size:** {file.size / 1024:.2f} KB")
+        st.write(f"** Size:** {file.size / 1024:.2f} KB")
 
-        # Preview Data
         st.subheader("🔍 Data Preview")
         st.dataframe(df.head())
 
-        # Data Cleaning
         st.subheader("🛠 Data Cleaning Options")
         col1, col2 = st.columns(2)
 
         with col1:
             if st.button(f"🚀 Remove Duplicates from {file.name}"):
                 df.drop_duplicates(inplace=True)
-                st.success("✅ Duplicates Removed!")
+                st.success(" Duplicates Removed!")
 
         with col2:
             if st.button(f"🩺 Fill Missing Values for {file.name}"):
                 numeric_cols = df.select_dtypes(include=['number']).columns
                 df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())
-                st.success("✅ Missing Values Filled!")
+                st.success(" Missing Values Filled!")
 
         # Column Selection
         st.subheader("📌 Select Columns to Keep")
@@ -116,4 +107,4 @@ if uploaded_files:
                 mime=mime_type
             )
 
-st.sidebar.success("✅ All files processed successfully!")
+st.sidebar.success(" All files processed successfully!")
