@@ -35,7 +35,7 @@ st.markdown(
 )
 
 st.markdown("<h1 style='text-align: center; color: #4A90E2;'>📊 Data Sweeper</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: gray;'>Effortlessly clean, visualize, and convert your datasets!</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: gray;'>transform your files between CSV and Excel formats with built-in data cleaning and visualization!</p>", unsafe_allow_html=True)
 
 st.sidebar.header("📂 Upload Your Files")
 uploaded_files = st.sidebar.file_uploader("Upload CSV or Excel files", type=["csv", "xlsx"], accept_multiple_files=True)
