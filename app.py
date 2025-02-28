@@ -53,7 +53,7 @@ if uploaded_files:
             continue
 
         st.markdown(f"### 📂 File: {file.name}")
-        st.write(f"** Size:** {file.size / 1024:.2f} KB")
+        st.write(f"**###Size:** {file.size / 1024:.2f} KB")
 
         st.subheader("🔍 Data Preview")
         st.dataframe(df.head())
